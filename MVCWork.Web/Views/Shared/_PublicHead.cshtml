@@ -1,0 +1,205 @@
+﻿@* Views/Shared/_PublicHead.cshtml *@
+@using MVCWork.Models;
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+
+    /* Modal styles */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    .container {
+        background-color: lightgray; /* 容器的背景色 */
+        padding: 5px;
+        white-space: nowrap; /* 不换行 */
+        padding-left: 55%;
+    }
+
+    .nav-links {
+        display: inline-block;
+        position: relative;
+        margin-right: 1px; /* 添加一些间距使链接更易分辨 */
+        /*background-color: white; /* 链接的背景色 */
+        padding: 5px;
+    }
+
+        .nav-links a {
+            text-decoration: none;
+            margin: 1px;
+            padding: 1px;
+            display: inline-block;
+            color: #333; /* 深灰色字体 */
+        }
+        .dropdown-toggle{margin:1px;
+                         padding:1px;
+        }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 10000; /* 确保足够高 */
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1;
+            }
+    .dropdown-toggle .fa-chevron-down {
+        margin-left: 5px;
+    }
+</style>
+@*<h2>Login Modal Example</h2>*@
+<!-- Trigger/Open The Modal -->
+@{
+    // Retrieve session data and cast it to userInfos_Model
+    var userSession = Session["users"] as UserInfos_Model;
+}
+<div class="container">
+    <text>亲，欢迎来到松果电商！</text>
+    <a id="RegisterBtn" href="/Users/Register">Register</a>
+    @if (userSession != null)
+    {
+        <a href="#link5">My Account</a>
+
+    }
+    else
+    {
+        <input id="loginBtn" type="button" value="Login" />
+        <!-- Render login button -->
+
+    }
+    <div class="nav-links">
+        <a href="#link1" class="dropdown-toggle">客户服务<i class="fas fa-chevron-down"></i></a>|
+        <div class="dropdown-content">
+            <a href="#link1-1">帮助中心</a>
+            <a href="#link1-2">售后服务</a>
+            <a href="#link1-3">在线客服</a>
+        </div>
+    </div>
+    <div class="nav-links">
+        <a href="#link2" class="dropdown-toggle">企业采购<i class="fas fa-chevron-down"></i></a>|
+        <div class="dropdown-content">
+            <a href="#link2-1">企业购</a>
+            <a href="#link2-2">公共采购</a>
+            <a href="#link2-3">工品优选</a>
+        </div>
+    </div>
+    <div class="nav-links">
+        <a href="#link3" class="dropdown-toggle">我的订单<i class="fas fa-chevron-down"></i></a>|
+        <div class="dropdown-content">
+            <a href="#link3-1">子链接3-1</a>
+            <a href="#link3-2">子链接3-2</a>
+            <a href="#link3-3">子链接3-3</a>
+        </div>
+    </div>
+    <div class="nav-links">
+        <a href="#link3" class="dropdown-toggle">收藏夹<i class="fas fa-chevron-down"></i></a>|
+        <div class="dropdown-content">
+            <a href="#link3-1">子链接3-1</a>
+            <a href="#link3-2">子链接3-2</a>
+            <a href="#link3-3">子链接3-3</a>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+
+<div id="loginModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="loginForm" action="/Users/LoginSubmit">
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<script>
+    // Get the modal
+    var modal = document.getElementById("loginModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("loginBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    document.querySelectorAll('.dropdown-toggle').forEach(function (link) {
+        link.addEventListener('mouseenter', function () {
+            this.nextElementSibling.style.display = 'block';
+        });
+        link.addEventListener('mouseleave', function () {
+            const dropdown = this.nextElementSibling;
+            setTimeout(function () {
+                if (!dropdown.matches(':hover')) {
+                    dropdown.style.display = 'none';
+                }
+            }, 100);
+        });
+    });
+
+    document.querySelectorAll('.dropdown-content').forEach(function (dropdown) {
+        dropdown.addEventListener('mouseleave', function () {
+            this.style.display = 'none';
+        });
+    });
+</script>

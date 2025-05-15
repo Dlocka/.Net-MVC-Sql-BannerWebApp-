@@ -1,0 +1,186 @@
+﻿@model MVCWork.Web.Models.UserModel_Web
+
+@*强类型视图：视图界面针对这个用户信息模型建立的*@
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <style>
+        .InputNotify_Invalid {
+            color: indianred
+        }
+    </style>
+    <script src="~/Models/jquery-3.7.1.js"></script>
+    <script>
+        function validateNull(SelfValidateFunction, input) {
+            var inputValue = $(input).val().trim();
+            var errorSpan = $(input).next();
+            if (inputValue == null || inputValue == "") {
+                errorSpan.text("This item cannot be empty");
+                //errorSpan.val() = "This item cannot be empty";
+            }
+            else {
+                //alert("Self check")
+                SelfValidateFunction(input);
+                //errorSpan.val() = "inputting";
+            }
+        }
+
+        function SelfValidateFunc_UserName(input) {
+            //alert($(input).val())
+            var errorSpan = $(input).next();
+            var regex = new RegExp("^[a-zA-Z0-9].{0,49}$");
+            if (regex.test($(input).val())) {
+                errorSpan.text("Valid input");
+            }
+            else {
+                errorSpan.text("Invalid input: too long, or start with punctuation");
+            }
+        }
+        function SelfValidateFunc_Password_FirstInput(input) {
+            //alert($(input).val())
+            var errorSpan = $(input).next();
+            
+            var regex = new RegExp("^(?=.*[a-zA-Z])(?=.*\\d).{6,16}$");
+            if (regex.test($(input).val()))
+            {
+                errorSpan.text("Valid input");
+            }
+            else {
+                errorSpan.text("Please input 6 to 16 chars, containing both number and letter");
+            }
+            if ($('#Password_FirstInput').val() != $('#Password_ConfirmInput').val()) {
+
+                $('#Password_ConfirmInput').next().text("Should be as same as first input")
+            }
+        }
+        function SelfValidateFunc_Password_ConfirmInput(input) {
+            //alert($(input).val())
+            var errorSpan = $(input).next();
+            
+            var regex = new RegExp("^(?=.*[a-zA-Z])(?=.*\\d).{6,16}$");
+
+            if ($(input).val() != $('#Password_FirstInput').val())
+            {
+                //alert("no same");
+                $(input).next().text("Should be as same as first input");
+            }
+            else if (regex.test($(input).val())) {
+                errorSpan.text("Valid input");
+            }
+            else {
+                errorSpan.text("Please input 6 to 16 chars, containing both number and letter");
+            }
+          
+
+        }
+        function SelfValidateFunc_Email(input) {
+            //alert($(input).val());
+            var errorSpan = $(input).next();
+
+            var regex = new RegExp("^[^\\s\\.]+@@[^\\s]+\\.[^\\s\\.]+$");
+            if (regex.test($(input).val())) {
+                errorSpan.text("Valid input");
+            }
+            else {
+                errorSpan.text("Not an email address");
+            }
+        }
+        function SelfValidateFunc_PhoneNumber(input) {
+            //alert($(input).val());
+            var errorSpan = $(input).next();
+            var regexString = $(input).data("val-regex-pattern");
+
+            var regex = new RegExp(regexString);
+            if (regex.test($(input).val())) {
+                errorSpan.text("Valid input");
+            }
+            else {
+                errorSpan.text("Please input 11 numbers");
+            }
+        }
+        $(document).ready(function () {
+            $('#UserName').on('focusout', function () {
+                validateNull(SelfValidateFunc_UserName, '#UserName');
+            });
+            $('#Password_FirstInput').on('focusout', function () {
+                validateNull(SelfValidateFunc_Password_FirstInput, '#Password_FirstInput');
+            });
+            $('#Password_ConfirmInput').on('focusout', function () {
+                validateNull(SelfValidateFunc_Password_ConfirmInput, '#Password_ConfirmInput');
+            });
+            $('#Email').on('focusout', function () {
+                validateNull(SelfValidateFunc_Email, '#Email');
+            });
+            $('#PhoneNumber').on('focusout', function () {
+                validateNull(SelfValidateFunc_PhoneNumber, '#PhoneNumber');
+            });
+
+        }
+        );
+
+            //$(#PhoneNumber).on('focusout',)
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm("RegisterCheck", "Users", FormMethod.Post))
+    {
+        <div>
+            @Html.DisplayNameFor(model => model.UserName)
+            <input id="UserName" type="text" name="UserName" />
+            <span class="InputNotify_Invalid">请输入内容</span>
+        </div>
+        @*<div>
+            @Html.DisplayNameFor(model => model.IDCardTypeID)
+            @Html.DropDownListFor(model => model.IDCardTypeID, ViewData["IDCardTypeList"] as List<SelectListItem>)
+
+            <span class="InputNotify_Invalid">请输入内容</span>
+        </div>*@
+        <div>
+            @Html.LabelFor(model => model.UserIDCard, new { @id = "label_UserIDCard" })
+            @Html.TextBoxFor(model => model.UserIDCard, new { @id = "UserIDCard" })
+            <span class="InputNotify_Invalid">请输入内容</span>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Password_FirstInput, new { @id = "label_Password_FirstInput" })
+            @Html.TextBoxFor(model => model.Password_FirstInput, new { @id = "Password_FirstInput" })
+            <span class="InputNotify_Invalid" id="firstInputSpan">请输入内容</span>
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.Password_ConfirmInput)
+            @Html.TextBoxFor(model => model.Password_ConfirmInput, new { @id = "Password_ConfirmInput" })
+            @Html.ValidationMessageFor(m => m.Password_ConfirmInput, "", new { @class = "text-danger" })
+            <span class="InputNotify_Invalid" id="ConfirmInputSpan" value="密码1">密码1</span>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { @id = "Email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            <span class="InputNotify_Invalid" value="密码2">密码2</span>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.PhoneNumber, new { @id = "label_PhoneNumber" })
+            @Html.TextBoxFor(model => model.PhoneNumber, new {
+           @id = "PhoneNumber",
+           @data_val = "true",
+     @data_val_regex = "Please input 11 numbers",
+           @data_val_regex_pattern = "\\d{11}"
+       })
+            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+            <span class="InputNotify_Invalid">请输入内容</span>
+        </div>
+        <input type="submit" value="Register" />
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
