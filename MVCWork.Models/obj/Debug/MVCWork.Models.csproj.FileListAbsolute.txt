@@ -1,0 +1,6 @@
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.Models\bin\Debug\MVCWork.Models.dll
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.Models\bin\Debug\MVCWork.Models.pdb
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.Models\obj\Debug\MVCWork.Models.csproj.CoreCompileInputs.cache
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.Models\obj\Debug\MVCWork.Models.dll
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.Models\obj\Debug\MVCWork.Models.pdb
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.Models\obj\Debug\MVCWork.Models.csprojAssemblyReference.cache
