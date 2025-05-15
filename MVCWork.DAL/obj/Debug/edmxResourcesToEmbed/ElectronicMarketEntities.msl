@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ElectronicMarketModelStoreContainer" CdmEntityContainer="ElectronicMarketEntities">
+    <EntitySetMapping Name="IDCardType">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.IDCardType">
+        <MappingFragment StoreEntitySet="IDCardType">
+          <ScalarProperty Name="IDCardTypeID" ColumnName="IDCardTypeID" />
+          <ScalarProperty Name="CardType" ColumnName="CardType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.OrderDetails">
+        <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductListItems">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.ProductListItems">
+        <MappingFragment StoreEntitySet="ProductListItems">
+          <ScalarProperty Name="ListItemID" ColumnName="ListItemID" />
+          <ScalarProperty Name="ProductListID" ColumnName="ProductListID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductLists">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.ProductLists">
+        <MappingFragment StoreEntitySet="ProductLists">
+          <ScalarProperty Name="ProductListID" ColumnName="ProductListID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ListName" ColumnName="ListName" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ProductPageID" ColumnName="ProductPageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductPage">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.ProductPage">
+        <MappingFragment StoreEntitySet="ProductPage">
+          <ScalarProperty Name="ProductPageID" ColumnName="ProductPageID" />
+          <ScalarProperty Name="Head" ColumnName="Head" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfos">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.UserInfos">
+        <MappingFragment StoreEntitySet="UserInfos">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="IDCardTypeID" ColumnName="IDCardTypeID" />
+          <ScalarProperty Name="UserIDCard" ColumnName="UserIDCard" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomePageExhibitPro">
+      <EntityTypeMapping TypeName="ElectronicMarketModel.HomePageExhibitPro">
+        <MappingFragment StoreEntitySet="HomePageExhibitPro">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="PageLabel" ColumnName="PageLabel" />
+          <ScalarProperty Name="ExhibitId" ColumnName="ExhibitId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

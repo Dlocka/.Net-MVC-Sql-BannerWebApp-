@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A3A69FB-D6C7-452C-A893-2D6C4C9A5B74}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MVCWork.DAL</RootNamespace>
+    <AssemblyName>MVCWork.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="ElectronicMarketEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectronicMarketEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ElectronicMarketEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ElectronicMarketEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectronicMarketEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="HomePageExhibitPro.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDCardType.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDetails.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Orders.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Poducts\ProductInfoService.cs" />
+    <Compile Include="Product.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductListItems.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductLists.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductPage.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfos.cs">
+      <DependentUpon>ElectronicMarketEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users\IDCardService.cs" />
+    <Compile Include="Users\UserInfoService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="ElectronicMarketEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ElectronicMarketEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ElectronicMarketEntities.edmx.diagram">
+      <DependentUpon>ElectronicMarketEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ElectronicMarketEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ElectronicMarketEntities.edmx</DependentUpon>
+      <LastGenOutput>ElectronicMarketEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ElectronicMarketEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ElectronicMarketEntities.edmx</DependentUpon>
+      <LastGenOutput>ElectronicMarketEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MVCWork.Models\MVCWork.Models.csproj">
+      <Project>{f3c6758e-e1bc-45b8-9180-4417ddb631ee}</Project>
+      <Name>MVCWork.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

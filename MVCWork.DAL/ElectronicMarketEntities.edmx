@@ -1,0 +1,740 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ElectronicMarketModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="HomePageExhibitPro">
+          <Key>
+            <PropertyRef Name="ExhibitId" />
+          </Key>
+          <Property Name="ExhibitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageLabel" Type="int" />
+          <Property Name="ProductID" Type="int" />
+        </EntityType>
+        <EntityType Name="IDCardType">
+          <Key>
+            <PropertyRef Name="IDCardTypeID" />
+          </Key>
+          <Property Name="IDCardTypeID" Type="int" Nullable="false" />
+          <Property Name="CardType" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="int" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateUserID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductListItems">
+          <Key>
+            <PropertyRef Name="ListItemID" />
+          </Key>
+          <Property Name="ListItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductListID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductLists">
+          <Key>
+            <PropertyRef Name="ProductListID" />
+          </Key>
+          <Property Name="ProductListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ListName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ProductPageID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductPage">
+          <Key>
+            <PropertyRef Name="ProductPageID" />
+          </Key>
+          <Property Name="ProductPageID" Type="int" Nullable="false" />
+          <Property Name="Head" Type="varchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserInfos">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCardTypeID" Type="int" Nullable="false" />
+          <Property Name="UserIDCard" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateTime" Type="time" Precision="7" />
+          <Property Name="Email" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Orders__Customer__412EB0B6">
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductLi__Produ__5812160E">
+          <End Role="ProductLists" Type="Self.ProductLists" Multiplicity="0..1" />
+          <End Role="ProductListItems" Type="Self.ProductListItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductLists">
+              <PropertyRef Name="ProductListID" />
+            </Principal>
+            <Dependent Role="ProductListItems">
+              <PropertyRef Name="ProductListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductLi__Produ__59063A47">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductListItems" Type="Self.ProductListItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductListItems">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductLi__UserI__5535A963">
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="0..1" />
+          <End Role="ProductLists" Type="Self.ProductLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProductLists">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExhibitProduct">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="HomePageExhibitPro" Type="Self.HomePageExhibitPro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="HomePageExhibitPro">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_OrderID">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_UserID">
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CreateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLists_ProductPageId">
+          <End Role="ProductPage" Type="Self.ProductPage" Multiplicity="0..1" />
+          <End Role="ProductLists" Type="Self.ProductLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPage">
+              <PropertyRef Name="ProductPageID" />
+            </Principal>
+            <Dependent Role="ProductLists">
+              <PropertyRef Name="ProductPageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLists_UserId">
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="0..1" />
+          <End Role="ProductLists" Type="Self.ProductLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProductLists">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPage_UserId">
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="1" />
+          <End Role="ProductPage" Type="Self.ProductPage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProductPage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_IDCardType">
+          <End Role="IDCardType" Type="Self.IDCardType" Multiplicity="1" />
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDCardType">
+              <PropertyRef Name="IDCardTypeID" />
+            </Principal>
+            <Dependent Role="UserInfos">
+              <PropertyRef Name="IDCardTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ElectronicMarketModelStoreContainer">
+          <EntitySet Name="HomePageExhibitPro" EntityType="Self.HomePageExhibitPro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IDCardType" EntityType="Self.IDCardType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductListItems" EntityType="Self.ProductListItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductLists" EntityType="Self.ProductLists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductPage" EntityType="Self.ProductPage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfos" EntityType="Self.UserInfos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Orders__Customer__412EB0B6" Association="Self.FK__Orders__Customer__412EB0B6">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductLi__Produ__5812160E" Association="Self.FK__ProductLi__Produ__5812160E">
+            <End Role="ProductLists" EntitySet="ProductLists" />
+            <End Role="ProductListItems" EntitySet="ProductListItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductLi__Produ__59063A47" Association="Self.FK__ProductLi__Produ__59063A47">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductListItems" EntitySet="ProductListItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductLi__UserI__5535A963" Association="Self.FK__ProductLi__UserI__5535A963">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="ProductLists" EntitySet="ProductLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExhibitProduct" Association="Self.FK_ExhibitProduct">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="HomePageExhibitPro" EntitySet="HomePageExhibitPro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_OrderID" Association="Self.FK_OrderDetails_OrderID">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_UserID" Association="Self.FK_Product_UserID">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLists_ProductPageId" Association="Self.FK_ProductLists_ProductPageId">
+            <End Role="ProductPage" EntitySet="ProductPage" />
+            <End Role="ProductLists" EntitySet="ProductLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLists_UserId" Association="Self.FK_ProductLists_UserId">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="ProductLists" EntitySet="ProductLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPage_UserId" Association="Self.FK_ProductPage_UserId">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="ProductPage" EntitySet="ProductPage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_IDCardType" Association="Self.FK_Users_IDCardType">
+            <End Role="IDCardType" EntitySet="IDCardType" />
+            <End Role="UserInfos" EntitySet="UserInfos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ElectronicMarketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="IDCardType">
+          <Key>
+            <PropertyRef Name="IDCardTypeID" />
+          </Key>
+          <Property Name="IDCardTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CardType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserInfos" Relationship="Self.FK_Users_IDCardType" FromRole="IDCardType" ToRole="UserInfos" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="Int32" Nullable="false" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_OrderDetails_OrderID" FromRole="OrderDetails" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_OrderID" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="UserInfos" Relationship="Self.FK__Orders__Customer__412EB0B6" FromRole="Orders" ToRole="UserInfos" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateUserID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductListItems" Relationship="Self.FK__ProductLi__Produ__59063A47" FromRole="Product" ToRole="ProductListItems" />
+          <NavigationProperty Name="HomePageExhibitPro" Relationship="ElectronicMarketModel.FK_ExhibitProduct" FromRole="Product" ToRole="HomePageExhibitPro" />
+          <NavigationProperty Name="UserInfos" Relationship="ElectronicMarketModel.FK_Product_UserID" FromRole="Product" ToRole="UserInfos" />
+        </EntityType>
+        <EntityType Name="ProductListItems">
+          <Key>
+            <PropertyRef Name="ListItemID" />
+          </Key>
+          <Property Name="ListItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductListID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ProductLi__Produ__59063A47" FromRole="ProductListItems" ToRole="Product" />
+          <NavigationProperty Name="ProductLists" Relationship="Self.FK__ProductLi__Produ__5812160E" FromRole="ProductListItems" ToRole="ProductLists" />
+        </EntityType>
+        <EntityType Name="ProductLists">
+          <Key>
+            <PropertyRef Name="ProductListID" />
+          </Key>
+          <Property Name="ProductListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ListName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ProductPageID" Type="Int32" />
+          <NavigationProperty Name="ProductListItems" Relationship="Self.FK__ProductLi__Produ__5812160E" FromRole="ProductLists" ToRole="ProductListItems" />
+          <NavigationProperty Name="UserInfos" Relationship="Self.FK__ProductLi__UserI__5535A963" FromRole="ProductLists" ToRole="UserInfos" />
+          <NavigationProperty Name="ProductPage" Relationship="Self.FK_ProductLists_ProductPageId" FromRole="ProductLists" ToRole="ProductPage" />
+          <NavigationProperty Name="UserInfos1" Relationship="Self.FK_ProductLists_UserId" FromRole="ProductLists" ToRole="UserInfos" />
+        </EntityType>
+        <EntityType Name="ProductPage">
+          <Key>
+            <PropertyRef Name="ProductPageID" />
+          </Key>
+          <Property Name="ProductPageID" Type="Int32" Nullable="false" />
+          <Property Name="Head" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProductLists" Relationship="Self.FK_ProductLists_ProductPageId" FromRole="ProductPage" ToRole="ProductLists" />
+          <NavigationProperty Name="UserInfos" Relationship="Self.FK_ProductPage_UserId" FromRole="ProductPage" ToRole="UserInfos" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserInfos">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCardTypeID" Type="Int32" Nullable="false" />
+          <Property Name="UserIDCard" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateTime" Type="Time" Precision="7" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IDCardType" Relationship="Self.FK_Users_IDCardType" FromRole="UserInfos" ToRole="IDCardType" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Customer__412EB0B6" FromRole="UserInfos" ToRole="Orders" />
+          <NavigationProperty Name="ProductLists" Relationship="Self.FK__ProductLi__UserI__5535A963" FromRole="UserInfos" ToRole="ProductLists" />
+          <NavigationProperty Name="ProductLists1" Relationship="Self.FK_ProductLists_UserId" FromRole="UserInfos" ToRole="ProductLists" />
+          <NavigationProperty Name="ProductPage" Relationship="Self.FK_ProductPage_UserId" FromRole="UserInfos" ToRole="ProductPage" />
+          <NavigationProperty Name="Product" Relationship="ElectronicMarketModel.FK_Product_UserID" FromRole="UserInfos" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Users_IDCardType">
+          <End Role="IDCardType" Type="Self.IDCardType" Multiplicity="1" />
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDCardType">
+              <PropertyRef Name="IDCardTypeID" />
+            </Principal>
+            <Dependent Role="UserInfos">
+              <PropertyRef Name="IDCardTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_OrderID">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Customer__412EB0B6">
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductLi__Produ__59063A47">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductListItems" Type="Self.ProductListItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductListItems">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductLi__Produ__5812160E">
+          <End Role="ProductLists" Type="Self.ProductLists" Multiplicity="0..1" />
+          <End Role="ProductListItems" Type="Self.ProductListItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductLists">
+              <PropertyRef Name="ProductListID" />
+            </Principal>
+            <Dependent Role="ProductListItems">
+              <PropertyRef Name="ProductListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductLi__UserI__5535A963">
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="0..1" />
+          <End Role="ProductLists" Type="Self.ProductLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProductLists">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLists_ProductPageId">
+          <End Role="ProductPage" Type="Self.ProductPage" Multiplicity="0..1" />
+          <End Role="ProductLists" Type="Self.ProductLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPage">
+              <PropertyRef Name="ProductPageID" />
+            </Principal>
+            <Dependent Role="ProductLists">
+              <PropertyRef Name="ProductPageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductLists_UserId">
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="0..1" />
+          <End Role="ProductLists" Type="Self.ProductLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProductLists">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPage_UserId">
+          <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="1" />
+          <End Role="ProductPage" Type="Self.ProductPage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProductPage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ElectronicMarketEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="IDCardType" EntityType="Self.IDCardType" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="ProductListItems" EntityType="Self.ProductListItems" />
+          <EntitySet Name="ProductLists" EntityType="Self.ProductLists" />
+          <EntitySet Name="ProductPage" EntityType="Self.ProductPage" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UserInfos" EntityType="Self.UserInfos" />
+          <AssociationSet Name="FK_Users_IDCardType" Association="Self.FK_Users_IDCardType">
+            <End Role="IDCardType" EntitySet="IDCardType" />
+            <End Role="UserInfos" EntitySet="UserInfos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_OrderID" Association="Self.FK_OrderDetails_OrderID">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Customer__412EB0B6" Association="Self.FK__Orders__Customer__412EB0B6">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductLi__Produ__59063A47" Association="Self.FK__ProductLi__Produ__59063A47">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductListItems" EntitySet="ProductListItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductLi__Produ__5812160E" Association="Self.FK__ProductLi__Produ__5812160E">
+            <End Role="ProductLists" EntitySet="ProductLists" />
+            <End Role="ProductListItems" EntitySet="ProductListItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductLi__UserI__5535A963" Association="Self.FK__ProductLi__UserI__5535A963">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="ProductLists" EntitySet="ProductLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLists_ProductPageId" Association="Self.FK_ProductLists_ProductPageId">
+            <End Role="ProductPage" EntitySet="ProductPage" />
+            <End Role="ProductLists" EntitySet="ProductLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductLists_UserId" Association="Self.FK_ProductLists_UserId">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="ProductLists" EntitySet="ProductLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPage_UserId" Association="Self.FK_ProductPage_UserId">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="ProductPage" EntitySet="ProductPage" />
+          </AssociationSet>
+          <EntitySet Name="HomePageExhibitPro" EntityType="ElectronicMarketModel.HomePageExhibitPro" />
+          <AssociationSet Name="FK_ExhibitProduct" Association="ElectronicMarketModel.FK_ExhibitProduct">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="HomePageExhibitPro" EntitySet="HomePageExhibitPro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_UserID" Association="ElectronicMarketModel.FK_Product_UserID">
+            <End Role="UserInfos" EntitySet="UserInfos" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="HomePageExhibitPro">
+          <Key>
+            <PropertyRef Name="ExhibitId" />
+          </Key>
+          <Property Name="ExhibitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageLabel" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="ElectronicMarketModel.FK_ExhibitProduct" FromRole="HomePageExhibitPro" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_ExhibitProduct">
+          <End Type="ElectronicMarketModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="ElectronicMarketModel.HomePageExhibitPro" Role="HomePageExhibitPro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="HomePageExhibitPro">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_UserID">
+          <End Type="ElectronicMarketModel.UserInfos" Role="UserInfos" Multiplicity="1" />
+          <End Type="ElectronicMarketModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfos">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CreateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ElectronicMarketModelStoreContainer" CdmEntityContainer="ElectronicMarketEntities">
+          <EntitySetMapping Name="IDCardType">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.IDCardType">
+              <MappingFragment StoreEntitySet="IDCardType">
+                <ScalarProperty Name="IDCardTypeID" ColumnName="IDCardTypeID" />
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.OrderDetails">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductListItems">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.ProductListItems">
+              <MappingFragment StoreEntitySet="ProductListItems">
+                <ScalarProperty Name="ListItemID" ColumnName="ListItemID" />
+                <ScalarProperty Name="ProductListID" ColumnName="ProductListID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductLists">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.ProductLists">
+              <MappingFragment StoreEntitySet="ProductLists">
+                <ScalarProperty Name="ProductListID" ColumnName="ProductListID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ListName" ColumnName="ListName" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ProductPageID" ColumnName="ProductPageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductPage">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.ProductPage">
+              <MappingFragment StoreEntitySet="ProductPage">
+                <ScalarProperty Name="ProductPageID" ColumnName="ProductPageID" />
+                <ScalarProperty Name="Head" ColumnName="Head" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfos">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.UserInfos">
+              <MappingFragment StoreEntitySet="UserInfos">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IDCardTypeID" ColumnName="IDCardTypeID" />
+                <ScalarProperty Name="UserIDCard" ColumnName="UserIDCard" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomePageExhibitPro">
+            <EntityTypeMapping TypeName="ElectronicMarketModel.HomePageExhibitPro">
+              <MappingFragment StoreEntitySet="HomePageExhibitPro">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="PageLabel" ColumnName="PageLabel" />
+                <ScalarProperty Name="ExhibitId" ColumnName="ExhibitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

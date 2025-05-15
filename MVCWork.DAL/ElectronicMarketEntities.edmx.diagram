@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c62199ab4b28430ca717d892062e9e5a" Name="Diagram1">
+        <EntityTypeShape EntityType="ElectronicMarketModel.IDCardType" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicMarketModel.OrderDetails" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicMarketModel.Orders" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicMarketModel.Product" Width="1.5" PointX="7.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicMarketModel.ProductListItems" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicMarketModel.ProductLists" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicMarketModel.ProductPage" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicMarketModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicMarketModel.UserInfos" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="ElectronicMarketModel.FK_Users_IDCardType" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectronicMarketModel.FK_OrderDetails_OrderID" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectronicMarketModel.FK__Orders__Customer__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectronicMarketModel.FK__ProductLi__Produ__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectronicMarketModel.FK__ProductLi__Produ__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectronicMarketModel.FK__ProductLi__UserI__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectronicMarketModel.FK_ProductLists_ProductPageId" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectronicMarketModel.FK_ProductLists_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectronicMarketModel.FK_ProductPage_UserId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ElectronicMarketModel.HomePageExhibitPro" Width="1.5" PointX="9.75" PointY="11" />
+        <AssociationConnector Association="ElectronicMarketModel.FK_ExhibitProduct" />
+        <AssociationConnector Association="ElectronicMarketModel.FK_Product_UserID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

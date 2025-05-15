@@ -1,0 +1,15 @@
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\MVCWork.DAL.dll.config
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\MVCWork.DAL.dll
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\MVCWork.DAL.pdb
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\EntityFramework.dll
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\EntityFramework.xml
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\obj\Debug\MVCWork.DAL.csproj.CoreCompileInputs.cache
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\obj\Debug\MVCWork.DAL.dll
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\obj\Debug\MVCWork.DAL.pdb
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\MVCWork.Models.dll
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\bin\Debug\MVCWork.Models.pdb
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\obj\Debug\MVCWork.DAL.csprojAssemblyReference.cache
+D:\.Net 初级\作业完成\MVCWork1\MVCWork.DAL\obj\Debug\MVCWork.DAL.csproj.CopyComplete
