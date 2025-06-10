@@ -4,7 +4,7 @@ This repository contains the source code for an Electronic Market web applicatio
 
 ## Technologies Used
 
-* **Backend Framework:** .NET Framework MVC
+* **Backend Framework:** .NET Framework 4.7.2 or 4.8 MVC
 * **Programming Language:** C#
 * **Database:** SQL Server 2014
 * **Development Environment:** Visual Studio 2017
